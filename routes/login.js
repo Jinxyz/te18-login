@@ -15,10 +15,16 @@ router.post('/', function(req, res, next) {
   const password = req.body.password;
 
   if (password == "ABCD"){
+    // kolla om login stämmer
     res.send('Victory!')
   }
     else {
-      res.send('You lose! LOSER');
+      // kommentera ut vid felsökning
+      res.render('login', 
+      {
+        title: 'skolfoft',
+        error: 'FEL!'
+      });
     }
 
 });
