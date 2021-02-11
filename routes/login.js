@@ -16,7 +16,10 @@ router.post('/', function(req, res, next) {
 
   if (password == "ABCD"){
     // kolla om login stämmer
-    res.send('Victory!')
+    req.session.loggedin = true;
+    req.session.username = username;
+    res.redirect('/sekret');
+
   }
     else {
       // kommentera ut vid felsökning
