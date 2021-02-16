@@ -30,7 +30,7 @@ router.post('/',
   
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render('login',{ errors: errors.array()});
+      return res.render('login',{ errors: errors.array()});
     }
 
   console.log(req.body);
