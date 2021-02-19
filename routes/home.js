@@ -4,9 +4,9 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.session.loggedin) {
-    res.send('Äntligen hemma!'); 
+    res.render('home');
   } else {
-      res.send('Please login to view this page!');
+    res.redirect('/login');
   }
 });
 
