@@ -15,7 +15,7 @@ module.exports.destroy = async function(req, res, next) {
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render('login',{ errors: errors.array()});
+      return res.render('login',{ username: req.body.username, errors: errors.array()});
     }
 
   console.log(req.body);
