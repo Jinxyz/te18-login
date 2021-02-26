@@ -10,6 +10,7 @@ module.exports.show = async function(req, res, next) {
 };
 
 module.exports.store = async function(req, res, next) {
+    console.table(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors.array());
@@ -53,5 +54,5 @@ module.exports.update = async (req, res, next) => {
     // för extra säkerhet så kräv password vid ändring av username/password
     // byta username
     const sql = 'UPDATE users SET name=? WHERE id = ?'; // name och id
-  }
-};
+  } 
+}; 

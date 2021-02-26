@@ -20,8 +20,8 @@ block content
         if errors 
           .invalid-feedback Passwords do not match 
       .mb-3
-        label.form-label.visually-hidden(for="password")
-        input#password.form-control.text-center(placeholder="✅Confirm password✅" type="password", name="password" class=errors ? 'is-invalid' : '')
+        label.form-label.visually-hidden(for="passwordconfirmation")
+        input#password.form-control.text-center(placeholder="✅Confirm password✅" type="password", name="passwordconfirmation" class=errors ? 'is-invalid' : '')
         if errors 
           .invalid-feedback Passwords do not match 
 
