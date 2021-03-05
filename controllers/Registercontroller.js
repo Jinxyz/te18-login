@@ -10,7 +10,6 @@ module.exports.show = async function(req, res, next) {
 };
 
 module.exports.store = async function(req, res, next) {
-    console.table(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors.array());
@@ -23,7 +22,7 @@ module.exports.store = async function(req, res, next) {
     bcrypt.hash(password, 10, async function (err, hash) {
       if (err) throw err;
       try {
-        const sql = 'INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, now(), now())';
+        const sql = 'INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, ?, ?, now(), now())';
         const result = await query(sql, [username, email, hash]);
 
         if (result.insertId > 0) {
@@ -31,8 +30,14 @@ module.exports.store = async function(req, res, next) {
         }
 
       } catch (e) {
-        next(e);
-        console.error(e);
+        if (e.errno === 1062) {
+          return res.render('register', {
+            username: e.sqlMessage.includes('users.name') ? 'Duplicate entry' : null,
+            email: e.sqlMessage.includes('users.email') ? 'Duplicate entry' : null,
+          });
+        } else {
+          next(e);
+        }
       }
     });
 };

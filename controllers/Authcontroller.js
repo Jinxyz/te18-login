@@ -6,12 +6,6 @@ module.exports.show = async function(req, res, next) {
     return res.render('login');
 };
 
-module.exports.destroy = async function(req, res, next) {
-  req.session.loggedin = false;
-  req.session.destroy();
-  return res.redirect('/');
-};
-
 module.exports.store = async function(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -44,4 +38,11 @@ module.exports.store = async function(req, res, next) {
       next(e);
       console.error(e);
     } 
+};
+
+
+module.exports.destroy = async function(req, res, next) {
+  req.session.loggedin = false;
+  req.session.destroy();
+  return res.redirect('/');
 };
